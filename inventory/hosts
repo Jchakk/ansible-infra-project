@@ -1,0 +1,5 @@
+[lab]
+node1
+
+[lab:vars]
+ansible_user=vagrant

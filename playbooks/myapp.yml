@@ -1,0 +1,39 @@
+- name: Deploy custom app
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Copy script
+      ansible.builtin.copy:
+        src: files/myapp.sh
+        dest: /usr/local/bin/myapp.sh
+        mode: '0755'
+
+    - name: Create systemd service
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/myapp.service
+        content: |
+          [Unit]
+          Description=My Custom App
+          After=network.target
+
+          [Service]
+          ExecStart=/usr/local/bin/myapp.sh
+          Restart=always
+          RestartSec=5
+          Nice=10
+          CPUQuota=20%
+
+          [Install]
+          WantedBy=multi-user.target
+      notify: Reload systemd
+
+    - name: Enable and start service
+      ansible.builtin.systemd:
+        name: myapp
+        enabled: yes
+        state: started
+
+  handlers:
+    - name: Reload systemd
+      ansible.builtin.command: systemctl daemon-reload
