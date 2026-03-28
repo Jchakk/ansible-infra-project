@@ -1,7 +1,7 @@
 # Ansible Infrastructure Project
 
 ## Overview
-Projet fil rouge de montée en compétences Linux + Ansible + Git.
+Projet fil rouge Linux + Ansible + Git.
 
 ## Current scope
 - custom systemd service deployment
