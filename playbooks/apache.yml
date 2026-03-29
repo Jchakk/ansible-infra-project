@@ -2,38 +2,5 @@
   hosts: all
   become: yes
 
-  tasks:
-    - name: Install Apache
-      ansible.builtin.dnf:
-        name: httpd
-        state: present
-
-    - name: Start and enable Apache
-      ansible.builtin.systemd:
-        name: httpd
-        state: started
-        enabled: yes
-
-    - name: Deploy custom index.html
-      ansible.builtin.copy:
-        src: files/index.html
-        dest: /var/www/html/index.html
-        mode: '0644'
-
-    - name: Ensure firewalld is installed
-      ansible.builtin.dnf:
-        name: firewalld
-        state: present
-
-    - name: Start and enable firewalld
-      ansible.builtin.systemd:
-        name: firewalld
-        state: started
-        enabled: yes
-
-    - name: Open HTTP port in firewall
-      ansible.posix.firewalld:
-        service: http
-        permanent: true
-        state: enabled
-        immediate: yes
+  roles:
+    - apache
