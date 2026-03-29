@@ -1,0 +1,20 @@
+- name: Deploy Apache web server
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Apache
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Start and enable Apache
+      ansible.builtin.systemd:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: Deploy custom index.html
+      ansible.builtin.copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+        mode: '0644'
