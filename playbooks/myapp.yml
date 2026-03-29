@@ -33,6 +33,11 @@
         name: myapp
         enabled: yes
         state: started
+    - name: Deploy logrotate config for myapp
+      ansible.builtin.copy:
+        src: files/myapp.logrotate
+        dest: /etc/logrotate.d/myapp
+        mode: '0644'
 
   handlers:
     - name: Reload systemd
