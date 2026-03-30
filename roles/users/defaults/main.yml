@@ -2,9 +2,9 @@ users_list:
   - name: devops
     shell: /bin/bash
     groups: wheel
-    ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHsq6DqlegYynThkR+0TDIetDP/GTUr7vBLW0lrrMRk5 ansible@lab"
+    ssh_key: "{{ ssh_public_key }}"
     sudo: true
   - name: auditor
     shell: /bin/bash
-    ssh_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHsq6DqlegYynThkR+0TDIetDP/GTUr7vBLW0lrrMRk5 ansible@lab"
+    ssh_key: "{{ ssh_public_key }}"
     sudo: false
