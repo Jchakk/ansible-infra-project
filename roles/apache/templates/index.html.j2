@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title>{{ apache_page_title }}</title>
+  </head>
+  <body>
+    <h1>{{ apache_page_title }}</h1>
+    <p>{{ apache_page_message }}</p>
+    {% if apache_show_host %}
+    <p>Serveur: {{ inventory_hostname }}</p>
+    {% endif %}
+  </body>
+</html>

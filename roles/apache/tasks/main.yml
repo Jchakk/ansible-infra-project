@@ -9,10 +9,12 @@
     state: started
     enabled: yes
 
-- name: Deploy custom index.html
-  ansible.builtin.copy:
-    src: index.html
+- name: Deploy templated index.html
+  ansible.builtin.template:
+    src: index.html.j2
     dest: /var/www/html/index.html
+    owner: root
+    group: root
     mode: '0644'
 
 - name: Ensure firewalld is installed
