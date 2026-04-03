@@ -8,5 +8,13 @@
     {% if apache_show_host %}
     <p>Serveur: {{ inventory_hostname }}</p>
     {% endif %}
+
+    <h2>Utilisateurs autorisés</h2>
+    <p>Nombre d'utilisateurs autorisés: {{ apache_allowed_users | default([]) | length }}</p>
+    <ul>
+    {% for user in apache_allowed_users |default([]) %}
+      <li>{{ user }}</li>
+    {% endfor %}
+    </ul>
   </body>
 </html>
