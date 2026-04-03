@@ -7,7 +7,8 @@
   ansible.builtin.systemd:
     name: httpd
     state: started
-    enabled: yes
+    enabled: true
+  when: apache.enabled
 
 - name: Deploy templated index.html
   ansible.builtin.template:
@@ -34,3 +35,9 @@
     permanent: true
     state: enabled
     immediate: yes
+
+- name: Create files for allowed users
+  ansible.builtin.file:
+    path: "/tmp/{{ item }}"
+    state: touch
+  loop: "{{ apache.allowed_users }}"

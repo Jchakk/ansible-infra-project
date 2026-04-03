@@ -7,3 +7,8 @@ apache:
   allowed_users: 
     - devops
     - auditor
+  - name: Create files for allowed users
+    ansible.builtin.file:
+      path: "/tmp/{{ item }}"
+      state: touch
+    loop: "{{ apache.allowed_users }}"
